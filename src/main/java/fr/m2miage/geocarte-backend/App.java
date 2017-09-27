@@ -34,6 +34,7 @@ public class App extends SpringBootServletInitializer implements CommandLineRunn
     public void run(String... args) throws Exception 
     {
         log.info("L'application geocarte vient de demarrer");
+        //
     	exCtrl.TestPersist();
     }
     
