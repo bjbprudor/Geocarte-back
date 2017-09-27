@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>fr.m2miage</groupId>
-	<artifactId>geocarte-backend</artifactId>
+	<artifactId>geocarte-back</artifactId>
 	<version>1.0</version>
 	<packaging>war</packaging>
 
-	<name>geocarte-backend</name>
+	<name>geocarte-back</name>
 	<url>http://maven.apache.org</url>
 
 	<parent>
@@ -39,10 +39,11 @@
 
 		<!-- Database -->
 		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<version>9.4.1212.jre7</version><!--$NO-MVN-MAN-VER$ -->
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.7-dmr</version>
 		</dependency>
+
 
 		<!-- Logging -->
 		<dependency>
