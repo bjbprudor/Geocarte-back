@@ -1,4 +1,4 @@
-package fr.ekolis.SpringBootJPA.model;
+package fr.m2miage.geocartebck.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -17,7 +17,8 @@ public class ComposedId implements Serializable
     private int id;
  
     @Column(name = "date")
-    private Timestamp date;
+    private String date;
+   // private Timestamp date;
  
     public int getIdbalise() 
     {
@@ -28,22 +29,28 @@ public class ComposedId implements Serializable
     {
     	this.id = id;
     }
-    
-	public Timestamp getDate() 
-	{
+
+    public String getDate()
+    {
+        return date;
+    }
+/*
+   public Timestamp getDate()
+{
 		return date;
 	}
-	
+
 	public void setDate(Timestamp dt)
 	{
 		this.date = dt;
 	}
-    
+    */
     public ComposedId() 
     {
     }
- 
-    public ComposedId(int id, Timestamp date) 
+
+    //public ComposedId(int id, Timestamp date)
+    public ComposedId(int id, String date)
     {
         this.id = id;
         this.date = date;
@@ -61,7 +68,7 @@ public class ComposedId implements Serializable
     @Override
     public int hashCode() 
     {
-        return Objects.hash(getIdbalise(), getDate());
+        return Objects.hash(getIdbalise(), date);//getDate());
     }
     
     @Override
@@ -69,4 +76,5 @@ public class ComposedId implements Serializable
     {
     	return String.format("CID : { id : %s, date : %s }", id, date);
     }
+
 }

@@ -1,4 +1,4 @@
-package fr.ekolis.SpringBootJPA.model;
+package fr.m2miage.geocartebck.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;

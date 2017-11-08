@@ -1,4 +1,4 @@
-package fr.ekolis.SpringBootJPA;
+package fr.m2miage.geocartebck;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 
-import fr.ekolis.SpringBootJPA.controller.ExempleController;
+import fr.m2miage.geocartebck.controller.ExempleController;
 
 @SpringBootApplication
 public class App extends SpringBootServletInitializer implements CommandLineRunner 

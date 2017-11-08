@@ -1,9 +1,9 @@
-package fr.ekolis.SpringBootJPA.dao;
+package fr.m2miage.geocartebck.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import fr.ekolis.SpringBootJPA.model.ComposedEntity;
-import fr.ekolis.SpringBootJPA.model.ComposedId;
+import fr.m2miage.geocartebck.model.ComposedEntity;
+import fr.m2miage.geocartebck.model.ComposedId;
 
 public interface ComposedEntityRepository extends JpaRepository<ComposedEntity, ComposedId>
 {

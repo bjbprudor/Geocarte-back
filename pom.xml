@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>fr.m2miage</groupId>
-	<artifactId>geocarte-back</artifactId>
+	<artifactId>geocartebck</artifactId>
 	<version>1.0</version>
 	<packaging>war</packaging>
 

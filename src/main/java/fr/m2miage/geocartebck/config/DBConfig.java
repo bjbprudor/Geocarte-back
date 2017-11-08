@@ -1,4 +1,4 @@
-package fr.ekolis.SpringBootJPA.config;
+package fr.m2miage.geocartebck.config;
 
 import java.util.HashMap;
 
@@ -18,8 +18,8 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
 @PropertySource({ "classpath:application.properties" })
-@EnableJpaRepositories(basePackages = "fr.ekolis.SpringBootJPA.dao",entityManagerFactoryRef = "getEntityManager", transactionManagerRef = "getTransactionManager")
-public class ExempleConfig 
+@EnableJpaRepositories(basePackages = "fr.m2miage.geocartebck.dao",entityManagerFactoryRef = "getEntityManager", transactionManagerRef = "getTransactionManager")
+public class DBConfig
 {
     @Autowired
     private Environment env;
@@ -29,7 +29,7 @@ public class ExempleConfig
     {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(getDataSource());
-        em.setPackagesToScan(new String[] { "fr.ekolis.SpringBootJPA.model" });
+        em.setPackagesToScan(new String[] { "fr.m2miage.geocartebck" });
  
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);

@@ -1,8 +1,6 @@
-package fr.ekolis.SpringBootJPA.model;
+package fr.m2miage.geocartebck.model;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
-import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -19,8 +17,8 @@ public class ComposedEntity implements Serializable
     
 	private String name;
 	
-    @Column(name = "created_at")
-    private Timestamp createdAt;
+    /*@Column(name = "created_at")
+    private Timestamp createdAt;*/
        
     public ComposedId getId() 
     {
@@ -42,33 +40,45 @@ public class ComposedEntity implements Serializable
 		this.name = name;
 	}
 
-	public Timestamp getCreatedAt() 
+	/*
+	public Timestamp getCreatedAt()
 	{
 		return createdAt;
 	}
+	*/
 
+/*
 	public void setCreatedAt(Timestamp createdAt) 
 	{
 		this.createdAt = createdAt;
 	}
-
+*/
 	public ComposedEntity()
     {
     	
     }
     
-    public ComposedEntity(int id, Timestamp dt, String name, Timestamp ct)
+    public ComposedEntity(int id, String dt, String name)
     {
     	ComposedId cid = new ComposedId(id,dt);
     	this.id = cid;
     	this.name = name;
-    	this.createdAt = ct;
     }
-    
+
+/*
+	public ComposedEntity(int id, Timestamp dt, String name, Timestamp ct)
+	{
+		ComposedId cid = new ComposedId(id,dt);
+		this.id = cid;
+		this.name = name;
+		this.createdAt = ct;
+	}
+	*/
+
     @Override
     public String toString() 
     {
-    	return String.format("CE : { id : %s, name : %s , createdAt : %s }", id, name, createdAt);
+    	return String.format("CE : { id : %s, name : %s }", id, name);
     }
     
 }
