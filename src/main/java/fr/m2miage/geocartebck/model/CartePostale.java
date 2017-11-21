@@ -1,61 +1,126 @@
 package fr.m2miage.geocartebck.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
-@Table(name = "ancienNom")
+@Table(name = "cartePostale")
 public class CartePostale implements Serializable
 {
 
-	private static final long serialVersionUID = 2959644193621394587L;
-
 	@Id
-	private int numero;
+	@GeneratedValue
+	private long id;
 
-	@OneToMany
-    Commune commune;
+	@Column(nullable = false)
+    private long codeEditeur;
 
-    private String name;
+	@ManyToOne(optional = false)
+    private Editeur editeur;
 
-    public int getId()
-    {
-		return id;
-	}
+	//peut etre supprimée ?
+	@ManyToOne
+    private Monument monument;
 
-	public void setId(int id)
-	{
-		this.id = id;
-	}
+	// peut etre supprimée
+	@ManyToOne
+    private Commune commune;
 
-	public String getName()
-	{
-		return name;
-	}
+	@OneToMany(mappedBy = "cartePostale")
+    private Set<VarianteCarte> lesVariantes;
 
-	public void setName(String name)
-	{
-		this.name = name;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public CartePostale()
+    public long getCodeEditeur() {
+        return codeEditeur;
+    }
+
+    public void setCodeEditeur(long codeEditeur) {
+        this.codeEditeur = codeEditeur;
+    }
+
+    public Editeur getEditeur() {
+        return editeur;
+    }
+
+    public void setEditeur(Editeur editeur) {
+        this.editeur = editeur;
+    }
+
+    public Monument getMonument() {
+        return monument;
+    }
+
+    public void setMonument(Monument monument) {
+        this.monument = monument;
+    }
+
+    public Commune getCommune() {
+        return commune;
+    }
+
+    public void setCommune(Commune commune) {
+        this.commune = commune;
+    }
+
+    public Set<VarianteCarte> getLesVariantes() {
+        return lesVariantes;
+    }
+
+    public void setLesVariantes(Set<VarianteCarte> lesVariantes) {
+        this.lesVariantes = lesVariantes;
+    }
+
+    public CartePostale()
     {
 
     }
 
-    public CartePostale(int id, String name)
-    {
-    	this.id = id;
-    	this.name = name;
+    public CartePostale(long codeEditeur, Editeur editeur, Monument monument, Commune commune) {
+        this.codeEditeur = codeEditeur;
+        this.editeur = editeur;
+        this.monument = monument;
+        this.commune = commune;
     }
-    
+
     @Override
-    public String toString() 
-    {
-    	return String.format("SE : { id : %s , name : %s }", this.id, this.name);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CartePostale)) return false;
+
+        CartePostale that = (CartePostale) o;
+
+        if (getId() != that.getId()) return false;
+        if (getCodeEditeur() != that.getCodeEditeur()) return false;
+        if (getEditeur() != null ? !getEditeur().equals(that.getEditeur()) : that.getEditeur() != null) return false;
+        if (getMonument() != null ? !getMonument().equals(that.getMonument()) : that.getMonument() != null)
+            return false;
+        return getCommune() != null ? getCommune().equals(that.getCommune()) : that.getCommune() == null;
     }
-    
+
+    @Override
+    public int hashCode() {
+        int result = (int) (getId() ^ (getId() >>> 32));
+        result = 31 * result + (int) (getCodeEditeur() ^ (getCodeEditeur() >>> 32));
+        result = 31 * result + (getEditeur() != null ? getEditeur().hashCode() : 0);
+        result = 31 * result + (getMonument() != null ? getMonument().hashCode() : 0);
+        result = 31 * result + (getCommune() != null ? getCommune().hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "CartePostale{" +
+                "id=" + id +
+                ", codeEditeur=" + codeEditeur +
+                ", editeur=" + editeur +
+                ", monument=" + monument +
+                ", commune=" + commune +
+                '}';
+    }
+
 }

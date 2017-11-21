@@ -1,61 +1,107 @@
 package fr.m2miage.geocartebck.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
-@Table(name = "ancienNom")
+@Table(name = "editeur")
 public class Editeur implements Serializable
 {
 
-	private static final long serialVersionUID = 2959644193621394587L;
-
 	@Id
-	private int numero;
+    @GeneratedValue
+	private long id;
 
-	@OneToMany
-    Commune commune;
+    @Column(nullable = false)
+    private String code;
 
-    private String name;
+    @Column(nullable = false)
+    private String nom;
 
-    public int getId()
-    {
-		return id;
-	}
+	@ManyToOne
+    private Commune commune;
 
-	public void setId(int id)
-	{
-		this.id = id;
-	}
+	@OneToMany(mappedBy = "editeur")
+    private Set<CartePostale> lesCartesPostales;
 
-	public String getName()
-	{
-		return name;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public void setName(String name)
-	{
-		this.name = name;
-	}
+    public String getCode() {
+        return code;
+    }
 
-	public Editeur()
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public Commune getCommune() {
+        return commune;
+    }
+
+    public void setCommune(Commune commune) {
+        this.commune = commune;
+    }
+
+    public Set<CartePostale> getLesCartesPostales() {
+        return lesCartesPostales;
+    }
+
+    public void setLesCartesPostales(Set<CartePostale> lesCartesPostales) {
+        this.lesCartesPostales = lesCartesPostales;
+    }
+
+    public Editeur()
     {
 
     }
 
-    public Editeur(int id, String name)
-    {
-    	this.id = id;
-    	this.name = name;
+    public Editeur(String code, String nom, Commune commune) {
+        this.code = code;
+        this.nom = nom;
+        this.commune = commune;
     }
-    
+
     @Override
-    public String toString() 
-    {
-    	return String.format("SE : { id : %s , name : %s }", this.id, this.name);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Editeur)) return false;
+
+        Editeur editeur = (Editeur) o;
+
+        if (getId() != editeur.getId()) return false;
+        if (!getCode().equals(editeur.getCode())) return false;
+        if (!getNom().equals(editeur.getNom())) return false;
+        return getCommune() != null ? getCommune().equals(editeur.getCommune()) : editeur.getCommune() == null;
     }
-    
+
+    @Override
+    public int hashCode() {
+        int result = (int) (getId() ^ (getId() >>> 32));
+        result = 31 * result + getCode().hashCode();
+        result = 31 * result + getNom().hashCode();
+        result = 31 * result + (getCommune() != null ? getCommune().hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Editeur{" +
+                "id=" + id +
+                ", code='" + code + '\'' +
+                ", nom='" + nom + '\'' +
+                ", commune=" + commune +
+                '}';
+    }
+
 }

@@ -1,61 +1,155 @@
 package fr.m2miage.geocartebck.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
-@Table(name = "ancienNom")
+@Table(name = "monument")
 public class Monument implements Serializable
 {
 
-	private static final long serialVersionUID = 2959644193621394587L;
-
 	@Id
-	private int numero;
+	@GeneratedValue
+	private int id;
 
-	@OneToMany
-    Commune commune;
+	@Column(nullable = false)
+	private String nom;
 
-    private String name;
+	@Column(nullable = false)
+	private int anneeConstruction;
 
-    public int getId()
-    {
-		return id;
-	}
+	@Column
+	private String divers;
 
-	public void setId(int id)
-	{
-		this.id = id;
-	}
+	@Column(nullable = false)
+    private float longitude;
 
-	public String getName()
-	{
-		return name;
-	}
+	@Column(nullable = false)
+    private float latitude;
 
-	public void setName(String name)
-	{
-		this.name = name;
-	}
+	@ManyToOne
+    private Commune commune;
 
-	public Monument()
+	@OneToMany(mappedBy = "monument")
+    private Set<CartePostale> lesCartesPostales;
+// variante
+	//    private Set<VarianteCarte> lesCartesPostales;
+
+    public int getId() {
+        return id;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public int getAnneeConstruction() {
+        return anneeConstruction;
+    }
+
+    public void setAnneeConstruction(int anneeConstruction) {
+        this.anneeConstruction = anneeConstruction;
+    }
+
+    public String getDivers() {
+        return divers;
+    }
+
+    public void setDivers(String divers) {
+        this.divers = divers;
+    }
+
+    public float getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(float longitude) {
+        this.longitude = longitude;
+    }
+
+    public float getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(float latitude) {
+        this.latitude = latitude;
+    }
+
+    public Commune getCommune() {
+        return commune;
+    }
+
+    public void setCommune(Commune commune) {
+        this.commune = commune;
+    }
+
+    public Set<CartePostale> getLesCartesPostales() {
+        return lesCartesPostales;
+    }
+
+    public void setLesCartesPostales(Set<CartePostale> lesCartesPostales) {
+        this.lesCartesPostales = lesCartesPostales;
+    }
+
+    public Monument()
     {
 
     }
 
-    public Monument(int id, String name)
-    {
-    	this.id = id;
-    	this.name = name;
+    public Monument(String nom, int anneeConstruction, String divers, float longitude, float latitude, Commune commune) {
+        this.nom = nom;
+        this.anneeConstruction = anneeConstruction;
+        this.divers = divers;
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.commune = commune;
     }
-    
+
     @Override
-    public String toString() 
-    {
-    	return String.format("SE : { id : %s , name : %s }", this.id, this.name);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Monument)) return false;
+
+        Monument monument = (Monument) o;
+
+        if (getId() != monument.getId()) return false;
+        if (getAnneeConstruction() != monument.getAnneeConstruction()) return false;
+        if (Float.compare(monument.getLongitude(), getLongitude()) != 0) return false;
+        if (Float.compare(monument.getLatitude(), getLatitude()) != 0) return false;
+        if (!getNom().equals(monument.getNom())) return false;
+        if (getDivers() != null ? !getDivers().equals(monument.getDivers()) : monument.getDivers() != null)
+            return false;
+        return getCommune() != null ? getCommune().equals(monument.getCommune()) : monument.getCommune() == null;
     }
-    
+
+    @Override
+    public int hashCode() {
+        int result = getId();
+        result = 31 * result + getNom().hashCode();
+        result = 31 * result + getAnneeConstruction();
+        result = 31 * result + (getDivers() != null ? getDivers().hashCode() : 0);
+        result = 31 * result + (getLongitude() != +0.0f ? Float.floatToIntBits(getLongitude()) : 0);
+        result = 31 * result + (getLatitude() != +0.0f ? Float.floatToIntBits(getLatitude()) : 0);
+        result = 31 * result + (getCommune() != null ? getCommune().hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Monument{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                ", anneeConstruction=" + anneeConstruction +
+                ", divers='" + divers + '\'' +
+                ", longitude=" + longitude +
+                ", latitude=" + latitude +
+                ", commune=" + commune +
+                '}';
+    }
+
 }

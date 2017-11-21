@@ -1,57 +1,81 @@
 package fr.m2miage.geocartebck.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name = "departement")
 public class Departement implements Serializable
 {
 
-	private static final long serialVersionUID = 2959644193621394587L;
-
 	@Id
-	private int id;
+	private int numero;
 
-    private String name;
+	@Column(nullable = false)
+    private String nom;
 
-    public int getId()
-    {
-		return id;
-	}
+    @OneToMany(mappedBy = "departement")
+    private Set<Commune> lesCommunes;
 
-	public void setId(int id)
-	{
-		this.id = id;
-	}
+    public int getNumero() {
+        return numero;
+    }
 
-	public String getName()
-	{
-		return name;
-	}
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
 
-	public void setName(String name)
-	{
-		this.name = name;
-	}
+    public String getNom() {
+        return nom;
+    }
 
-	public Departement()
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public Set<Commune> getLesCommunes() {
+        return lesCommunes;
+    }
+
+    public void setLesCommunes(Set<Commune> lesCommunes) {
+        this.lesCommunes = lesCommunes;
+    }
+
+    public Departement()
     {
 
     }
 
-    public Departement(int id, String name)
-    {
-    	this.id = id;
-    	this.name = name;
+    public Departement(int numero, String nom) {
+        this.numero = numero;
+        this.nom = nom;
     }
-    
+
     @Override
-    public String toString() 
-    {
-    	return String.format("SE : { id : %s , name : %s }", this.id, this.name);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Departement)) return false;
+
+        Departement that = (Departement) o;
+
+        if (getNumero() != that.getNumero()) return false;
+        return getNom().equals(that.getNom());
     }
-    
+
+    @Override
+    public int hashCode() {
+        int result = getNumero();
+        result = 31 * result + getNom().hashCode();
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Departement{" +
+                "numero=" + numero +
+                ", nom='" + nom + '\'' +
+                '}';
+    }
+
 }
