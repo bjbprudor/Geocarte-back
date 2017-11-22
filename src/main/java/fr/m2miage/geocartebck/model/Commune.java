@@ -27,7 +27,7 @@ public class Commune implements Serializable
 	@ManyToOne(optional = false)
     private Departement departement;
 
-    @OneToMany(mappedBy = "commune")
+    @OneToMany(mappedBy = "id.commune")
     private Set<AncienNom> lesAnciensNoms;
 
 	@ManyToOne
@@ -44,8 +44,6 @@ public class Commune implements Serializable
 
     @OneToMany(mappedBy = "commune")
     private Set<CartePostale> lesCartePostales;
-    //version variante
-    //private Set<VarianteCarte> lesVariantesCP;
 
     public int getInsee() {
         return insee;
@@ -146,16 +144,6 @@ public class Commune implements Serializable
     public Commune()
     {
 
-    }
-
-    public Commune(int insee, String article, String nom, float longitude, float latitude, Departement departement, Commune ancienneCommune) {
-        this.insee = insee;
-        this.article = article;
-        this.nom = nom;
-        this.longitude = longitude;
-        this.latitude = latitude;
-        this.departement = departement;
-        this.ancienneCommune = ancienneCommune;
     }
 
     @Override

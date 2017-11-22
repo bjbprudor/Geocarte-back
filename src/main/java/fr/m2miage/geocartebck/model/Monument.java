@@ -33,8 +33,6 @@ public class Monument implements Serializable
 
 	@OneToMany(mappedBy = "monument")
     private Set<CartePostale> lesCartesPostales;
-// variante
-	//    private Set<VarianteCarte> lesCartesPostales;
 
     public int getId() {
         return id;

@@ -20,15 +20,13 @@ public class CartePostale implements Serializable
 	@ManyToOne(optional = false)
     private Editeur editeur;
 
-	//peut etre supprimée ?
 	@ManyToOne
     private Monument monument;
 
-	// peut etre supprimée
 	@ManyToOne
     private Commune commune;
 
-	@OneToMany(mappedBy = "cartePostale")
+	@OneToMany(mappedBy = "id.cartePostale")
     private Set<VarianteCarte> lesVariantes;
 
     public long getId() {

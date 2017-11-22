@@ -22,7 +22,7 @@ public class Utilisateur implements Serializable
 	@Column(nullable = false)
     private String motdepasse;
 
-	@OneToMany(mappedBy = "utilisateur")
+	@OneToMany(mappedBy = "id.utilisateur")
     private Set<CartesUtilisateur> lesCartesUtilisateur;
 
     public int getId() {

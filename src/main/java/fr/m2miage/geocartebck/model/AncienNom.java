@@ -8,12 +8,8 @@ import java.io.Serializable;
 public class AncienNom implements Serializable
 {
 
-	@Id
-    @GeneratedValue
-	private long id;
-
-    @ManyToOne(optional = false)
-    private Commune commune;
+    @EmbeddedId
+    private AncienNomId id;
 
     @Column
     private String article;
@@ -21,17 +17,12 @@ public class AncienNom implements Serializable
     @Column(nullable = false)
     private String nom;
 
-    public long getId()
-    {
+    public AncienNomId getId() {
         return id;
     }
 
-    public Commune getCommune() {
-        return commune;
-    }
-
-    public void setCommune(Commune commune) {
-        this.commune = commune;
+    public void setId(AncienNomId id) {
+        this.id = id;
     }
 
     public String getArticle() {
@@ -50,14 +41,11 @@ public class AncienNom implements Serializable
         this.nom = nom;
     }
 
-    public AncienNom()
-    {
-
+    public AncienNom() {
     }
 
-    public AncienNom(Commune commune, String article, String nom)
-    {
-        this.commune = commune;
+    public AncienNom(AncienNomId id, String article, String nom) {
+        this.id = id;
         this.article = article;
         this.nom = nom;
     }
@@ -69,8 +57,7 @@ public class AncienNom implements Serializable
 
         AncienNom ancienNom = (AncienNom) o;
 
-        if (getId() != ancienNom.getId()) return false;
-        if (!getCommune().equals(ancienNom.getCommune())) return false;
+        if (!getId().equals(ancienNom.getId())) return false;
         if (getArticle() != null ? !getArticle().equals(ancienNom.getArticle()) : ancienNom.getArticle() != null)
             return false;
         return getNom().equals(ancienNom.getNom());
@@ -78,8 +65,7 @@ public class AncienNom implements Serializable
 
     @Override
     public int hashCode() {
-        int result = (int) (getId() ^ (getId() >>> 32));
-        result = 31 * result + getCommune().hashCode();
+        int result = getId().hashCode();
         result = 31 * result + (getArticle() != null ? getArticle().hashCode() : 0);
         result = 31 * result + getNom().hashCode();
         return result;
@@ -89,7 +75,6 @@ public class AncienNom implements Serializable
     public String toString() {
         return "AncienNom{" +
                 "id=" + id +
-                ", commune=" + commune +
                 ", article='" + article + '\'' +
                 ", nom='" + nom + '\'' +
                 '}';

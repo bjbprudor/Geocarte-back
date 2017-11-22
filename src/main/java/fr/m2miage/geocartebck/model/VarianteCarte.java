@@ -9,12 +9,8 @@ import java.util.Set;
 public class VarianteCarte implements Serializable
 {
 
-	@Id
-	@GeneratedValue
-	private int id;
-
-	@ManyToOne(optional = false)
-    private CartePostale cartePostale;
+    @EmbeddedId
+    private VarianteCarteId id;
 
 	@Column(nullable = false)
     private String legende;
@@ -22,26 +18,15 @@ public class VarianteCarte implements Serializable
 	@Column(nullable = false)
     private String image;
 
-	//variante
-    //@ManyToOne
-    //private Commune commune;
-
-    //@ManyToOne
-    //private Monument monument;
-
-    @OneToMany(mappedBy = "varianteCarte")
+    @OneToMany(mappedBy = "id.carte")
     private Set<CartesUtilisateur> lesCartesUtilisateur;
 
-    public int getId() {
+    public VarianteCarteId getId() {
         return id;
     }
 
-    public CartePostale getCartePostale() {
-        return cartePostale;
-    }
-
-    public void setCartePostale(CartePostale cartePostale) {
-        this.cartePostale = cartePostale;
+    public void setId(VarianteCarteId id) {
+        this.id = id;
     }
 
     public String getLegende() {
@@ -73,8 +58,8 @@ public class VarianteCarte implements Serializable
 
     }
 
-    public VarianteCarte(CartePostale cartePostale, String legende, String image) {
-        this.cartePostale = cartePostale;
+    public VarianteCarte(VarianteCarteId id, String legende, String image) {
+        this.id = id;
         this.legende = legende;
         this.image = image;
     }
@@ -86,16 +71,14 @@ public class VarianteCarte implements Serializable
 
         VarianteCarte that = (VarianteCarte) o;
 
-        if (getId() != that.getId()) return false;
-        if (!getCartePostale().equals(that.getCartePostale())) return false;
+        if (!getId().equals(that.getId())) return false;
         if (!getLegende().equals(that.getLegende())) return false;
         return getImage().equals(that.getImage());
     }
 
     @Override
     public int hashCode() {
-        int result = getId();
-        result = 31 * result + getCartePostale().hashCode();
+        int result = getId().hashCode();
         result = 31 * result + getLegende().hashCode();
         result = 31 * result + getImage().hashCode();
         return result;
@@ -105,10 +88,8 @@ public class VarianteCarte implements Serializable
     public String toString() {
         return "VarianteCarte{" +
                 "id=" + id +
-                ", cartePostale=" + cartePostale +
                 ", legende='" + legende + '\'' +
                 ", image='" + image + '\'' +
                 '}';
     }
-
 }

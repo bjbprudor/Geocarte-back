@@ -8,36 +8,18 @@ import java.io.Serializable;
 public class CartesUtilisateur implements Serializable
 {
 
-	@Id
-	private int id;
-
-    @ManyToOne(optional = false)
-    private VarianteCarte varianteCarte;
-
-    @ManyToOne(optional = false)
-    private Utilisateur utilisateur;
+    @EmbeddedId
+    private CarteUtilisateurId id;
 
     @Column(nullable = false)
     private int nombreExemplaires;
 
-    public int getId() {
+    public CarteUtilisateurId getId() {
         return id;
     }
 
-    public VarianteCarte getVarianteCarte() {
-        return varianteCarte;
-    }
-
-    public void setVarianteCarte(VarianteCarte varianteCarte) {
-        this.varianteCarte = varianteCarte;
-    }
-
-    public Utilisateur getUtilisateur() {
-        return utilisateur;
-    }
-
-    public void setUtilisateur(Utilisateur utilisateur) {
-        this.utilisateur = utilisateur;
+    public void setId(CarteUtilisateurId id) {
+        this.id = id;
     }
 
     public int getNombreExemplaires() {
@@ -48,15 +30,11 @@ public class CartesUtilisateur implements Serializable
         this.nombreExemplaires = nombreExemplaires;
     }
 
-    public CartesUtilisateur()
-    {
-
+    public CartesUtilisateur() {
     }
 
-    public CartesUtilisateur(int id, VarianteCarte varianteCarte, Utilisateur utilisateur, int nombreExemplaires) {
+    public CartesUtilisateur(CarteUtilisateurId id, int nombreExemplaires) {
         this.id = id;
-        this.varianteCarte = varianteCarte;
-        this.utilisateur = utilisateur;
         this.nombreExemplaires = nombreExemplaires;
     }
 
@@ -67,17 +45,13 @@ public class CartesUtilisateur implements Serializable
 
         CartesUtilisateur that = (CartesUtilisateur) o;
 
-        if (getId() != that.getId()) return false;
         if (getNombreExemplaires() != that.getNombreExemplaires()) return false;
-        if (!getVarianteCarte().equals(that.getVarianteCarte())) return false;
-        return getUtilisateur().equals(that.getUtilisateur());
+        return getId().equals(that.getId());
     }
 
     @Override
     public int hashCode() {
-        int result = getId();
-        result = 31 * result + getVarianteCarte().hashCode();
-        result = 31 * result + getUtilisateur().hashCode();
+        int result = getId().hashCode();
         result = 31 * result + getNombreExemplaires();
         return result;
     }
@@ -86,8 +60,6 @@ public class CartesUtilisateur implements Serializable
     public String toString() {
         return "CartesUtilisateur{" +
                 "id=" + id +
-                ", varianteCarte=" + varianteCarte +
-                ", utilisateur=" + utilisateur +
                 ", nombreExemplaires=" + nombreExemplaires +
                 '}';
     }
