@@ -1,9 +1,8 @@
 package fr.m2miage.geocartebck.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "cartePostale")
@@ -20,14 +19,14 @@ public class CartePostale implements Serializable
 	@ManyToOne(optional = false)
     private Editeur editeur;
 
-	@ManyToOne
-    private Monument monument;
+    @ManyToMany(mappedBy = "cartePostales")
+    private List<Monument> monuments;
 
 	@ManyToOne
     private Commune commune;
 
 	@OneToMany(mappedBy = "id.cartePostale")
-    private Set<VarianteCarte> lesVariantes;
+    private List<VarianteCarte> variantes;
 
     public long getId() {
         return id;
@@ -49,12 +48,12 @@ public class CartePostale implements Serializable
         this.editeur = editeur;
     }
 
-    public Monument getMonument() {
-        return monument;
+    public List<Monument> getMonuments() {
+        return monuments;
     }
 
-    public void setMonument(Monument monument) {
-        this.monument = monument;
+    public void setMonuments(List<Monument> monuments) {
+        this.monuments = monuments;
     }
 
     public Commune getCommune() {
@@ -65,60 +64,11 @@ public class CartePostale implements Serializable
         this.commune = commune;
     }
 
-    public Set<VarianteCarte> getLesVariantes() {
-        return lesVariantes;
+    public CartePostale() {
     }
 
-    public void setLesVariantes(Set<VarianteCarte> lesVariantes) {
-        this.lesVariantes = lesVariantes;
-    }
-
-    public CartePostale()
-    {
-
-    }
-
-    public CartePostale(long codeEditeur, Editeur editeur, Monument monument, Commune commune) {
+    public CartePostale(long codeEditeur, Editeur editeur) {
         this.codeEditeur = codeEditeur;
         this.editeur = editeur;
-        this.monument = monument;
-        this.commune = commune;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof CartePostale)) return false;
-
-        CartePostale that = (CartePostale) o;
-
-        if (getId() != that.getId()) return false;
-        if (getCodeEditeur() != that.getCodeEditeur()) return false;
-        if (getEditeur() != null ? !getEditeur().equals(that.getEditeur()) : that.getEditeur() != null) return false;
-        if (getMonument() != null ? !getMonument().equals(that.getMonument()) : that.getMonument() != null)
-            return false;
-        return getCommune() != null ? getCommune().equals(that.getCommune()) : that.getCommune() == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = (int) (getId() ^ (getId() >>> 32));
-        result = 31 * result + (int) (getCodeEditeur() ^ (getCodeEditeur() >>> 32));
-        result = 31 * result + (getEditeur() != null ? getEditeur().hashCode() : 0);
-        result = 31 * result + (getMonument() != null ? getMonument().hashCode() : 0);
-        result = 31 * result + (getCommune() != null ? getCommune().hashCode() : 0);
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "CartePostale{" +
-                "id=" + id +
-                ", codeEditeur=" + codeEditeur +
-                ", editeur=" + editeur +
-                ", monument=" + monument +
-                ", commune=" + commune +
-                '}';
-    }
-
 }

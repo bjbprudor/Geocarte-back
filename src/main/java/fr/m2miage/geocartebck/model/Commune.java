@@ -2,7 +2,7 @@ package fr.m2miage.geocartebck.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "commune")
@@ -27,23 +27,23 @@ public class Commune implements Serializable
 	@ManyToOne(optional = false)
     private Departement departement;
 
+    @ManyToOne
+    private Commune fusion;
+
+    @OneToMany(mappedBy = "fusion")
+    private List<Commune> ancienneCommunes;
+
     @OneToMany(mappedBy = "id.commune")
-    private Set<AncienNom> lesAnciensNoms;
+    private List<AncienNom> ancienNoms;
 
-	@ManyToOne
-    private Commune ancienneCommune;
-
-    @OneToMany(mappedBy = "ancienneCommune")
-    private Set<Commune> lesAnciennesCommunes;
+    @ManyToMany(mappedBy="communes")
+    private List<Editeur> editeurs;
 
     @OneToMany(mappedBy = "commune")
-    private Set<Editeur> lesEditeurs;
+    private List<Monument> monuments;
 
     @OneToMany(mappedBy = "commune")
-    private Set<Monument> lesMonuments;
-
-    @OneToMany(mappedBy = "commune")
-    private Set<CartePostale> lesCartePostales;
+    private List<CartePostale> cartePostales;
 
     public int getInsee() {
         return insee;
@@ -93,97 +93,64 @@ public class Commune implements Serializable
         this.departement = departement;
     }
 
-    public Set<AncienNom> getLesAnciensNoms() {
-        return lesAnciensNoms;
+    public Commune getFusion() {
+        return fusion;
     }
 
-    public void setLesAnciensNoms(Set<AncienNom> lesAnciensNoms) {
-        this.lesAnciensNoms = lesAnciensNoms;
+    public void setFusion(Commune fusion) {
+        this.fusion = fusion;
     }
 
-    public Commune getAncienneCommune() {
-        return ancienneCommune;
+    public List<Commune> getAncienneCommunes() {
+        return ancienneCommunes;
     }
 
-    public void setAncienneCommune(Commune ancienneCommune) {
-        this.ancienneCommune = ancienneCommune;
+    public void setAncienneCommunes(List<Commune> ancienneCommunes) {
+        this.ancienneCommunes = ancienneCommunes;
     }
 
-    public Set<Commune> getLesAnciennesCommunes() {
-        return lesAnciennesCommunes;
+    public List<AncienNom> getAncienNoms() {
+        return ancienNoms;
     }
 
-    public void setLesAnciennesCommunes(Set<Commune> lesAnciennesCommunes) {
-        this.lesAnciennesCommunes = lesAnciennesCommunes;
+    public void setAncienNoms(List<AncienNom> ancienNoms) {
+        this.ancienNoms = ancienNoms;
     }
 
-    public Set<Editeur> getLesEditeurs() {
-        return lesEditeurs;
+    public List<Editeur> getEditeurs() {
+        return editeurs;
     }
 
-    public void setLesEditeurs(Set<Editeur> lesEditeurs) {
-        this.lesEditeurs = lesEditeurs;
+    public void setEditeurs(List<Editeur> editeurs) {
+        this.editeurs = editeurs;
     }
 
-    public Set<Monument> getLesMonuments() {
-        return lesMonuments;
+    public List<Monument> getMonuments() {
+        return monuments;
     }
 
-    public void setLesMonuments(Set<Monument> lesMonuments) {
-        this.lesMonuments = lesMonuments;
+    public void setMonuments(List<Monument> monuments) {
+        this.monuments = monuments;
     }
 
-    public Set<CartePostale> getLesCartePostales() {
-        return lesCartePostales;
+    public List<CartePostale> getCartePostales() {
+        return cartePostales;
     }
 
-    public void setLesCartePostales(Set<CartePostale> lesCartePostales) {
-        this.lesCartePostales = lesCartePostales;
+    public void setCartePostales(List<CartePostale> cartePostales) {
+        this.cartePostales = cartePostales;
     }
 
-    public Commune()
-    {
-
+    public Commune() {
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Commune)) return false;
-
-        Commune commune = (Commune) o;
-
-        if (getInsee() != commune.getInsee()) return false;
-        if (Float.compare(commune.getLongitude(), getLongitude()) != 0) return false;
-        if (Float.compare(commune.getLatitude(), getLatitude()) != 0) return false;
-        if (getArticle() != null ? !getArticle().equals(commune.getArticle()) : commune.getArticle() != null)
-            return false;
-        if (!getNom().equals(commune.getNom())) return false;
-        if (!getDepartement().equals(commune.getDepartement())) return false;
-        return getAncienneCommune() != null ? getAncienneCommune().equals(commune.getAncienneCommune()) : commune.getAncienneCommune() == null;
+    public Commune(int insee, String article, String nom, float longitude, float latitude, Departement departement, Commune ancienneCommune) {
+        this.insee = insee;
+        this.article = article;
+        this.nom = nom;
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.departement = departement;
+        this.fusion = ancienneCommune;
     }
-
-    @Override
-    public int hashCode() {
-        int result = getInsee();
-        result = 31 * result + (getArticle() != null ? getArticle().hashCode() : 0);
-        result = 31 * result + getNom().hashCode();
-        result = 31 * result + (getLongitude() != +0.0f ? Float.floatToIntBits(getLongitude()) : 0);
-        result = 31 * result + (getLatitude() != +0.0f ? Float.floatToIntBits(getLatitude()) : 0);
-        result = 31 * result + getDepartement().hashCode();
-        result = 31 * result + (getAncienneCommune() != null ? getAncienneCommune().hashCode() : 0);
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Commune{" +
-                "insee=" + insee +
-                ", article='" + article + '\'' +
-                ", nom='" + nom + '\'' +
-                ", longitude=" + longitude +
-                ", latitude=" + latitude +
-                '}';
-    }
-
 }

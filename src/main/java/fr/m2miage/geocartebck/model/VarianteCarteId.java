@@ -33,38 +33,10 @@ public class VarianteCarteId implements Serializable
         this.cartePostale = cartePostale;
     }
 
-    public VarianteCarteId()
-    {
-
+    public VarianteCarteId() {
     }
 
     public VarianteCarteId(CartePostale cartePostale) {
         this.cartePostale = cartePostale;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof VarianteCarteId)) return false;
-
-        VarianteCarteId that = (VarianteCarteId) o;
-
-        if (getId() != that.getId()) return false;
-        return getCartePostale().equals(that.getCartePostale());
-    }
-
-    @Override
-    public int hashCode() {
-        int result = getId();
-        result = 31 * result + getCartePostale().hashCode();
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "VarianteCarteId{" +
-                "id=" + id +
-                ", cartePostale=" + cartePostale +
-                '}';
     }
 }

@@ -49,35 +49,4 @@ public class AncienNom implements Serializable
         this.article = article;
         this.nom = nom;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof AncienNom)) return false;
-
-        AncienNom ancienNom = (AncienNom) o;
-
-        if (!getId().equals(ancienNom.getId())) return false;
-        if (getArticle() != null ? !getArticle().equals(ancienNom.getArticle()) : ancienNom.getArticle() != null)
-            return false;
-        return getNom().equals(ancienNom.getNom());
-    }
-
-    @Override
-    public int hashCode() {
-        int result = getId().hashCode();
-        result = 31 * result + (getArticle() != null ? getArticle().hashCode() : 0);
-        result = 31 * result + getNom().hashCode();
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "AncienNom{" +
-                "id=" + id +
-                ", article='" + article + '\'' +
-                ", nom='" + nom + '\'' +
-                '}';
-    }
-
 }

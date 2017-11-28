@@ -2,7 +2,7 @@ package fr.m2miage.geocartebck.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "utilisateur")
@@ -23,7 +23,7 @@ public class Utilisateur implements Serializable
     private String motdepasse;
 
 	@OneToMany(mappedBy = "id.utilisateur")
-    private Set<CartesUtilisateur> lesCartesUtilisateur;
+    private List<CarteUtilisateur> carteUtilisateurs;
 
     public int getId() {
         return id;
@@ -53,17 +53,15 @@ public class Utilisateur implements Serializable
         this.motdepasse = motdepasse;
     }
 
-    public Set<CartesUtilisateur> getLesCartesUtilisateur() {
-        return lesCartesUtilisateur;
+    public List<CarteUtilisateur> getCarteUtilisateurs() {
+        return carteUtilisateurs;
     }
 
-    public void setLesCartesUtilisateur(Set<CartesUtilisateur> lesCartesUtilisateur) {
-        this.lesCartesUtilisateur = lesCartesUtilisateur;
+    public void setCarteUtilisateurs(List<CarteUtilisateur> carteUtilisateurs) {
+        this.carteUtilisateurs = carteUtilisateurs;
     }
 
-    public Utilisateur()
-    {
-
+    public Utilisateur() {
     }
 
     public Utilisateur(String nom, String email, String motdepasse) {
@@ -71,37 +69,4 @@ public class Utilisateur implements Serializable
         this.email = email;
         this.motdepasse = motdepasse;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Utilisateur)) return false;
-
-        Utilisateur that = (Utilisateur) o;
-
-        if (getId() != that.getId()) return false;
-        if (!getNom().equals(that.getNom())) return false;
-        if (!getEmail().equals(that.getEmail())) return false;
-        return getMotdepasse().equals(that.getMotdepasse());
-    }
-
-    @Override
-    public int hashCode() {
-        int result = getId();
-        result = 31 * result + getNom().hashCode();
-        result = 31 * result + getEmail().hashCode();
-        result = 31 * result + getMotdepasse().hashCode();
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Utilisateur{" +
-                "id=" + id +
-                ", nom='" + nom + '\'' +
-                ", email='" + email + '\'' +
-                ", motdepasse='" + motdepasse + '\'' +
-                '}';
-    }
-
 }

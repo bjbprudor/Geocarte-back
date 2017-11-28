@@ -21,10 +21,6 @@ public class AncienNomId implements Serializable
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public Commune getCommune() {
         return commune;
     }
@@ -33,40 +29,11 @@ public class AncienNomId implements Serializable
         this.commune = commune;
     }
 
-    public AncienNomId()
-    {
-
+    public AncienNomId() {
     }
 
-    public AncienNomId(Commune commune)
-    {
+    public AncienNomId(Commune commune) {
         this.commune = commune;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof AncienNomId)) return false;
-
-        AncienNomId that = (AncienNomId) o;
-
-        if (getId() != that.getId()) return false;
-        return getCommune().equals(that.getCommune());
-    }
-
-    @Override
-    public int hashCode() {
-        int result = getId();
-        result = 31 * result + getCommune().hashCode();
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "AncienNomId{" +
-                "id=" + id +
-                ", commune=" + commune +
-                '}';
     }
 
 }

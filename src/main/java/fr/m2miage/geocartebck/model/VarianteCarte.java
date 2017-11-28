@@ -2,24 +2,26 @@ package fr.m2miage.geocartebck.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "varianteCarte")
-public class VarianteCarte implements Serializable
-{
+public class VarianteCarte implements Serializable {
 
     @EmbeddedId
     private VarianteCarteId id;
 
-	@Column(nullable = false)
+    @Column(nullable = false)
     private String legende;
 
-	@Column(nullable = false)
-    private String image;
+    @Column(nullable = false)
+    private String face;
 
-    @OneToMany(mappedBy = "id.carte")
-    private Set<CartesUtilisateur> lesCartesUtilisateur;
+    @Column(nullable = false)
+    private String dos;
+
+    @OneToMany(mappedBy = "id.varianteCarte")
+    private List<CarteUtilisateur> carteUtilisateurs;
 
     public VarianteCarteId getId() {
         return id;
@@ -37,59 +39,37 @@ public class VarianteCarte implements Serializable
         this.legende = legende;
     }
 
-    public String getImage() {
-        return image;
+    public String getFace() {
+        return face;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setFace(String face) {
+        this.face = face;
     }
 
-    public Set<CartesUtilisateur> getLesCartesUtilisateur() {
-        return lesCartesUtilisateur;
+    public String getDos() {
+        return dos;
     }
 
-    public void setLesCartesUtilisateur(Set<CartesUtilisateur> lesCartesUtilisateur) {
-        this.lesCartesUtilisateur = lesCartesUtilisateur;
+    public void setDos(String dos) {
+        this.dos = dos;
     }
 
-    public VarianteCarte()
-    {
-
+    public List<CarteUtilisateur> getCarteUtilisateurs() {
+        return carteUtilisateurs;
     }
 
-    public VarianteCarte(VarianteCarteId id, String legende, String image) {
+    public void setCarteUtilisateurs(List<CarteUtilisateur> carteUtilisateurs) {
+        this.carteUtilisateurs = carteUtilisateurs;
+    }
+
+    public VarianteCarte() {
+    }
+
+    public VarianteCarte(VarianteCarteId id, String legende, String face, String dos) {
         this.id = id;
         this.legende = legende;
-        this.image = image;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof VarianteCarte)) return false;
-
-        VarianteCarte that = (VarianteCarte) o;
-
-        if (!getId().equals(that.getId())) return false;
-        if (!getLegende().equals(that.getLegende())) return false;
-        return getImage().equals(that.getImage());
-    }
-
-    @Override
-    public int hashCode() {
-        int result = getId().hashCode();
-        result = 31 * result + getLegende().hashCode();
-        result = 31 * result + getImage().hashCode();
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "VarianteCarte{" +
-                "id=" + id +
-                ", legende='" + legende + '\'' +
-                ", image='" + image + '\'' +
-                '}';
+        this.face = face;
+        this.dos = dos;
     }
 }

@@ -2,7 +2,7 @@ package fr.m2miage.geocartebck.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "monument")
@@ -31,8 +31,15 @@ public class Monument implements Serializable
 	@ManyToOne
     private Commune commune;
 
-	@OneToMany(mappedBy = "monument")
-    private Set<CartePostale> lesCartesPostales;
+	@ManyToOne
+    private TypeMonument type;
+
+	@ManyToMany
+    @JoinTable(
+            name="monumentCarte",
+            joinColumns=@JoinColumn(name="monument", referencedColumnName="id"),
+            inverseJoinColumns=@JoinColumn(name="cartePostale", referencedColumnName="id"))
+    private List<CartePostale> cartePostales;
 
     public int getId() {
         return id;
@@ -86,68 +93,31 @@ public class Monument implements Serializable
         this.commune = commune;
     }
 
-    public Set<CartePostale> getLesCartesPostales() {
-        return lesCartesPostales;
+    public List<CartePostale> getCartePostales() {
+        return cartePostales;
     }
 
-    public void setLesCartesPostales(Set<CartePostale> lesCartesPostales) {
-        this.lesCartesPostales = lesCartesPostales;
+    public void setCartePostales(List<CartePostale> cartePostales) {
+        this.cartePostales = cartePostales;
     }
 
-    public Monument()
-    {
-
+    public TypeMonument getType() {
+        return type;
     }
 
-    public Monument(String nom, int anneeConstruction, String divers, float longitude, float latitude, Commune commune) {
+    public void setType(TypeMonument type) {
+        this.type = type;
+    }
+
+    public Monument() {
+    }
+
+    public Monument(String nom, int anneeConstruction, String divers, float longitude, float latitude, TypeMonument type) {
         this.nom = nom;
         this.anneeConstruction = anneeConstruction;
         this.divers = divers;
         this.longitude = longitude;
         this.latitude = latitude;
-        this.commune = commune;
+        this.type = type;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Monument)) return false;
-
-        Monument monument = (Monument) o;
-
-        if (getId() != monument.getId()) return false;
-        if (getAnneeConstruction() != monument.getAnneeConstruction()) return false;
-        if (Float.compare(monument.getLongitude(), getLongitude()) != 0) return false;
-        if (Float.compare(monument.getLatitude(), getLatitude()) != 0) return false;
-        if (!getNom().equals(monument.getNom())) return false;
-        if (getDivers() != null ? !getDivers().equals(monument.getDivers()) : monument.getDivers() != null)
-            return false;
-        return getCommune() != null ? getCommune().equals(monument.getCommune()) : monument.getCommune() == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = getId();
-        result = 31 * result + getNom().hashCode();
-        result = 31 * result + getAnneeConstruction();
-        result = 31 * result + (getDivers() != null ? getDivers().hashCode() : 0);
-        result = 31 * result + (getLongitude() != +0.0f ? Float.floatToIntBits(getLongitude()) : 0);
-        result = 31 * result + (getLatitude() != +0.0f ? Float.floatToIntBits(getLatitude()) : 0);
-        result = 31 * result + (getCommune() != null ? getCommune().hashCode() : 0);
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Monument{" +
-                "id=" + id +
-                ", nom='" + nom + '\'' +
-                ", anneeConstruction=" + anneeConstruction +
-                ", divers='" + divers + '\'' +
-                ", longitude=" + longitude +
-                ", latitude=" + latitude +
-                ", commune=" + commune +
-                '}';
-    }
-
 }

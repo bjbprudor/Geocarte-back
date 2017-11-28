@@ -1,8 +1,6 @@
 package fr.m2miage.geocartebck.model;
 
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.GeneratedValue;
 import javax.persistence.ManyToOne;
 import java.io.Serializable;
 
@@ -11,17 +9,17 @@ public class CarteUtilisateurId implements Serializable
 {
 
     @ManyToOne(optional = false)
-    private VarianteCarte carte;
+    private VarianteCarte varianteCarte;
 
     @ManyToOne(optional = false)
     private Utilisateur utilisateur;
 
-    public VarianteCarte getCarte() {
-        return carte;
+    public VarianteCarte getVarianteCarte() {
+        return varianteCarte;
     }
 
-    public void setCarte(VarianteCarte carte) {
-        this.carte = carte;
+    public void setVarianteCarte(VarianteCarte varianteCarte) {
+        this.varianteCarte = varianteCarte;
     }
 
     public Utilisateur getUtilisateur() {
@@ -35,35 +33,10 @@ public class CarteUtilisateurId implements Serializable
     public CarteUtilisateurId() {
     }
 
-    public CarteUtilisateurId(VarianteCarte carte, Utilisateur utilisateur) {
-        this.carte = carte;
+    public CarteUtilisateurId(VarianteCarte varianteCarte, Utilisateur utilisateur)
+    {
+        this.varianteCarte = varianteCarte;
         this.utilisateur = utilisateur;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof CarteUtilisateurId)) return false;
-
-        CarteUtilisateurId that = (CarteUtilisateurId) o;
-
-        if (!getCarte().equals(that.getCarte())) return false;
-        return getUtilisateur().equals(that.getUtilisateur());
-    }
-
-    @Override
-    public int hashCode() {
-        int result = getCarte().hashCode();
-        result = 31 * result + getUtilisateur().hashCode();
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "CarteUtilisateurId{" +
-                "carte=" + carte +
-                ", utilisateur=" + utilisateur +
-                '}';
     }
 
 }

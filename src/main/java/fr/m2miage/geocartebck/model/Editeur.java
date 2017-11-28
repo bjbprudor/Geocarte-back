@@ -2,7 +2,7 @@ package fr.m2miage.geocartebck.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "editeur")
@@ -19,11 +19,15 @@ public class Editeur implements Serializable
     @Column(nullable = false)
     private String nom;
 
-	@ManyToOne
-    private Commune commune;
+    @ManyToMany
+    @JoinTable(
+            name="editeurCommune",
+            joinColumns=@JoinColumn(name="editeur", referencedColumnName="id"),
+            inverseJoinColumns=@JoinColumn(name="commune", referencedColumnName="insee"))
+    private List<Commune> communes;
 
 	@OneToMany(mappedBy = "editeur")
-    private Set<CartePostale> lesCartesPostales;
+    private List<CartePostale> cartePostales;
 
     public long getId() {
         return id;
@@ -45,63 +49,27 @@ public class Editeur implements Serializable
         this.nom = nom;
     }
 
-    public Commune getCommune() {
-        return commune;
+    public List<Commune> getCommunes() {
+        return communes;
     }
 
-    public void setCommune(Commune commune) {
-        this.commune = commune;
+    public void setCommunes(List<Commune> communes) {
+        this.communes = communes;
     }
 
-    public Set<CartePostale> getLesCartesPostales() {
-        return lesCartesPostales;
+    public List<CartePostale> getCartePostales() {
+        return cartePostales;
     }
 
-    public void setLesCartesPostales(Set<CartePostale> lesCartesPostales) {
-        this.lesCartesPostales = lesCartesPostales;
+    public void setCartePostales(List<CartePostale> cartePostales) {
+        this.cartePostales = cartePostales;
     }
 
-    public Editeur()
-    {
-
+    public Editeur() {
     }
 
-    public Editeur(String code, String nom, Commune commune) {
+    public Editeur(String code, String nom) {
         this.code = code;
         this.nom = nom;
-        this.commune = commune;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Editeur)) return false;
-
-        Editeur editeur = (Editeur) o;
-
-        if (getId() != editeur.getId()) return false;
-        if (!getCode().equals(editeur.getCode())) return false;
-        if (!getNom().equals(editeur.getNom())) return false;
-        return getCommune() != null ? getCommune().equals(editeur.getCommune()) : editeur.getCommune() == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = (int) (getId() ^ (getId() >>> 32));
-        result = 31 * result + getCode().hashCode();
-        result = 31 * result + getNom().hashCode();
-        result = 31 * result + (getCommune() != null ? getCommune().hashCode() : 0);
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Editeur{" +
-                "id=" + id +
-                ", code='" + code + '\'' +
-                ", nom='" + nom + '\'' +
-                ", commune=" + commune +
-                '}';
-    }
-
 }
