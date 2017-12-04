@@ -28,7 +28,7 @@ CREATE TABLE `anciennom` (
   `id` int(11) NOT NULL,
   `article` varchar(255) DEFAULT NULL,
   `nom` varchar(255) NOT NULL,
-  `commune_insee` int(11) NOT NULL,
+  `commune_insee` varchar(6) NOT NULL,
   PRIMARY KEY (`commune_insee`,`id`),
   CONSTRAINT `anciennom_commune` FOREIGN KEY (`commune_insee`) REFERENCES `commune` (`insee`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -44,7 +44,7 @@ DROP TABLE IF EXISTS `cartepostale`;
 CREATE TABLE `cartepostale` (
   `id` bigint(20) NOT NULL auto_increment,
   `codeEditeur` bigint(20) NOT NULL,
-  `commune_insee` int(11) DEFAULT NULL,
+  `commune_insee` varchar(6) DEFAULT NULL,
   `editeur_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `cartepostale_commune` (`commune_insee`),
@@ -81,12 +81,12 @@ DROP TABLE IF EXISTS `commune`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `commune` (
-  `insee` int(11) NOT NULL,
+  `insee` varchar(6) NOT NULL,
   `article` varchar(255) DEFAULT NULL,
   `latitude` float DEFAULT NULL,
   `longitude` float DEFAULT NULL,
   `nom` varchar(255) NOT NULL,
-  `departement_numero` int(11) NOT NULL,
+  `departement_numero` varchar(3) NOT NULL,
   `fusion_insee` int(11) DEFAULT NULL,
   PRIMARY KEY (`insee`),
   KEY `commune_departement` (`departement_numero`),
@@ -104,7 +104,7 @@ DROP TABLE IF EXISTS `departement`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `departement` (
-  `numero` int(11) NOT NULL,
+  `numero` varchar(3) NOT NULL,
   `nom` varchar(255) NOT NULL,
   PRIMARY KEY (`numero`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -134,7 +134,7 @@ DROP TABLE IF EXISTS `editeurcommune`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `editeurcommune` (
   `editeur` bigint(20) NOT NULL,
-  `commune` int(11) NOT NULL,
+  `commune` varchar(6) NOT NULL,
   KEY `editeurcommune_commune` (`commune`),
   KEY `editeurcommune_editeur` (`editeur`),
   CONSTRAINT `editeurcommune_commune` FOREIGN KEY (`commune`) REFERENCES `commune` (`insee`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -171,7 +171,7 @@ CREATE TABLE `monument` (
   `latitude` float DEFAULT NULL,
   `longitude` float DEFAULT NULL,
   `nom` varchar(255) NOT NULL,
-  `commune_insee` int(11) DEFAULT NULL,
+  `commune_insee` varchar(6) DEFAULT NULL,
   `type` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `monument_commune` (`commune_insee`),
