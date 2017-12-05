@@ -66,10 +66,12 @@ public class VarianteCarte implements Serializable {
     public VarianteCarte() {
     }
 
-    public VarianteCarte(VarianteCarteId id, String legende, String face, String dos) {
+    public VarianteCarte(VarianteCarteId id, String legende, String face, String dos)
+    {
         this.id = id;
         this.legende = legende;
         this.face = face;
         this.dos = dos;
     }
+
 }

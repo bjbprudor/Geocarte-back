@@ -10,7 +10,7 @@ public class Monument implements Serializable
 {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	@Column(nullable = false)
@@ -120,4 +120,5 @@ public class Monument implements Serializable
         this.latitude = latitude;
         this.type = type;
     }
+
 }

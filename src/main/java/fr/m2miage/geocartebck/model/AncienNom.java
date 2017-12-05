@@ -44,9 +44,11 @@ public class AncienNom implements Serializable
     public AncienNom() {
     }
 
-    public AncienNom(AncienNomId id, String article, String nom) {
+    public AncienNom(AncienNomId id, String article, String nom)
+    {
         this.id = id;
         this.article = article;
         this.nom = nom;
     }
+
 }

@@ -10,8 +10,8 @@ public class Editeur implements Serializable
 {
 
 	@Id
-    @GeneratedValue
-	private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 
     @Column(nullable = false)
     private String code;
@@ -72,4 +72,5 @@ public class Editeur implements Serializable
         this.code = code;
         this.nom = nom;
     }
+
 }

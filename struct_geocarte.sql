@@ -1,4 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `geotest` /*!40100 DEFAULT CHARACTER SET utf8 */;
+CREATE DATABASE IF NOT EXISTS `geotest` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `geotest`;
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
@@ -42,10 +42,10 @@ DROP TABLE IF EXISTS `cartepostale`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cartepostale` (
-  `id` bigint(20) NOT NULL auto_increment,
-  `codeEditeur` bigint(20) NOT NULL,
+  `id` int(20) NOT NULL auto_increment,
+  `codeEditeur` int(20) NOT NULL,
   `commune_insee` varchar(6) DEFAULT NULL,
-  `editeur_id` bigint(20) NOT NULL,
+  `editeur_id` int(20) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `cartepostale_commune` (`commune_insee`),
   KEY `cartepostale_editeur` (`editeur_id`),
@@ -64,7 +64,7 @@ DROP TABLE IF EXISTS `carteutilisateur`;
 CREATE TABLE `carteutilisateur` (
   `nombreExemplaires` int(11) NOT NULL,
   `utilisateur_id` int(11) NOT NULL,
-  `varianteCarte_cartePostale_id` bigint(20) NOT NULL,
+  `varianteCarte_cartePostale_id` int(20) NOT NULL,
   `varianteCarte_id` int(11) NOT NULL,
   PRIMARY KEY (`utilisateur_id`,`varianteCarte_cartePostale_id`,`varianteCarte_id`),
   KEY `carteutilisateur_variante` (`varianteCarte_cartePostale_id`,`varianteCarte_id`),
@@ -87,7 +87,7 @@ CREATE TABLE `commune` (
   `longitude` float DEFAULT NULL,
   `nom` varchar(255) NOT NULL,
   `departement_numero` varchar(3) NOT NULL,
-  `fusion_insee` int(11) DEFAULT NULL,
+  `fusion_insee` varchar(6) DEFAULT NULL,
   PRIMARY KEY (`insee`),
   KEY `commune_departement` (`departement_numero`),
   KEY `commune_fusion` (`fusion_insee`),
@@ -118,7 +118,7 @@ DROP TABLE IF EXISTS `editeur`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `editeur` (
-  `id` bigint(20) NOT NULL auto_increment,
+  `id` int(20) NOT NULL auto_increment,
   `code` varchar(255) NOT NULL,
   `nom` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
@@ -133,7 +133,7 @@ DROP TABLE IF EXISTS `editeurcommune`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `editeurcommune` (
-  `editeur` bigint(20) NOT NULL,
+  `editeur` int(20) NOT NULL,
   `commune` varchar(6) NOT NULL,
   KEY `editeurcommune_commune` (`commune`),
   KEY `editeurcommune_editeur` (`editeur`),
@@ -190,7 +190,7 @@ DROP TABLE IF EXISTS `monumentcarte`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `monumentcarte` (
   `monument` int(11) NOT NULL,
-  `cartePostale` bigint(20) NOT NULL,
+  `cartePostale` int(20) NOT NULL,
   KEY `monumentcarte_carte` (`cartePostale`),
   KEY `monumentcarte_monument` (`monument`),
   CONSTRAINT `monumentcarte_carte` FOREIGN KEY (`cartePostale`) REFERENCES `cartepostale` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -227,7 +227,7 @@ CREATE TABLE `variantecarte` (
   `face` varchar(255) NOT NULL,
   `legende` varchar(255) NOT NULL,
   `lengende_2` varchar(255) DEFAULT NULL,
-  `cartePostale_id` bigint(20) NOT NULL,
+  `cartePostale_id` int(20) NOT NULL,
   PRIMARY KEY (`cartePostale_id`,`id`),
   CONSTRAINT `variantecarte_carte` FOREIGN KEY (`cartePostale_id`) REFERENCES `cartepostale` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

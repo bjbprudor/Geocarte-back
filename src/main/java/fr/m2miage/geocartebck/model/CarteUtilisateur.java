@@ -37,4 +37,5 @@ public class CarteUtilisateur implements Serializable
         this.id = id;
         this.nombreExemplaires = nombreExemplaires;
     }
+
 }

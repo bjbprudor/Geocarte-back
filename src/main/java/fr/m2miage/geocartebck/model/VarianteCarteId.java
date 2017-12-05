@@ -2,7 +2,6 @@ package fr.m2miage.geocartebck.model;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.GeneratedValue;
 import javax.persistence.ManyToOne;
 import java.io.Serializable;
 
@@ -11,7 +10,6 @@ public class VarianteCarteId implements Serializable
 {
 
     @Column(name = "id")
-    @GeneratedValue
     private int id;
 
     @ManyToOne(optional = false)
@@ -36,7 +34,10 @@ public class VarianteCarteId implements Serializable
     public VarianteCarteId() {
     }
 
-    public VarianteCarteId(CartePostale cartePostale) {
+    public VarianteCarteId(int id, CartePostale cartePostale)
+    {
+        this.id = id;
         this.cartePostale = cartePostale;
     }
+
 }

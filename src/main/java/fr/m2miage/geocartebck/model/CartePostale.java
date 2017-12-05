@@ -10,8 +10,8 @@ public class CartePostale implements Serializable
 {
 
 	@Id
-	@GeneratedValue
-	private long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 
 	@Column(nullable = false)
     private long codeEditeur;
@@ -71,4 +71,5 @@ public class CartePostale implements Serializable
         this.codeEditeur = codeEditeur;
         this.editeur = editeur;
     }
+
 }

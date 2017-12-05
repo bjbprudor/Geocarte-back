@@ -1,10 +1,7 @@
 package fr.m2miage.geocartebck.model;
 
-import org.hibernate.annotations.Generated;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Table(name = "typeMonument")
@@ -12,7 +9,7 @@ public class TypeMonument implements Serializable
 {
 
 	@Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int numero;
 
 	@Column(nullable = false)

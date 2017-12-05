@@ -10,7 +10,7 @@ public class Commune implements Serializable
 {
 
 	@Id
-	private int insee;
+	private String insee;
 
 	@Column
 	private String article;
@@ -45,11 +45,11 @@ public class Commune implements Serializable
     @OneToMany(mappedBy = "commune")
     private List<CartePostale> cartePostales;
 
-    public int getInsee() {
+    public String getInsee() {
         return insee;
     }
 
-    public void setInsee(int insee) {
+    public void setInsee(String insee) {
         this.insee = insee;
     }
 
@@ -144,7 +144,7 @@ public class Commune implements Serializable
     public Commune() {
     }
 
-    public Commune(int insee, String article, String nom, float longitude, float latitude, Departement departement, Commune ancienneCommune) {
+    public Commune(String insee, String article, String nom, float longitude, float latitude, Departement departement, Commune ancienneCommune) {
         this.insee = insee;
         this.article = article;
         this.nom = nom;
@@ -153,4 +153,5 @@ public class Commune implements Serializable
         this.departement = departement;
         this.fusion = ancienneCommune;
     }
+
 }

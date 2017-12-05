@@ -10,7 +10,7 @@ public class Utilisateur implements Serializable
 {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	@Column(nullable = false)
@@ -69,4 +69,5 @@ public class Utilisateur implements Serializable
         this.email = email;
         this.motdepasse = motdepasse;
     }
+
 }

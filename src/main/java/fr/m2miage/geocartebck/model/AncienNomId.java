@@ -11,7 +11,6 @@ public class AncienNomId implements Serializable
 {
 
     @Column(name = "id")
-    @GeneratedValue
     private int id;
 
     @ManyToOne(optional = false)
@@ -19,6 +18,10 @@ public class AncienNomId implements Serializable
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Commune getCommune() {
@@ -32,7 +35,9 @@ public class AncienNomId implements Serializable
     public AncienNomId() {
     }
 
-    public AncienNomId(Commune commune) {
+    public AncienNomId(int id, Commune commune)
+    {
+        this.id = id;
         this.commune = commune;
     }
 

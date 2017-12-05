@@ -10,7 +10,7 @@ public class Departement implements Serializable
 {
 
 	@Id
-	private int numero;
+	private String numero;
 
 	@Column(nullable = false)
     private String nom;
@@ -18,11 +18,11 @@ public class Departement implements Serializable
     @OneToMany(mappedBy = "departement")
     private List<Commune> communes;
 
-    public int getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 
@@ -45,8 +45,9 @@ public class Departement implements Serializable
     public Departement() {
     }
 
-    public Departement(int numero, String nom) {
+    public Departement(String numero, String nom) {
         this.numero = numero;
         this.nom = nom;
     }
+
 }
