@@ -166,7 +166,7 @@ DROP TABLE IF EXISTS `monument`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `monument` (
   `id` int(11) NOT NULL auto_increment,
-  `anneeConstruction` int(11) NOT NULL,
+  `anneeConstruction` int(11) DEFAULT NULL,
   `divers` varchar(255) DEFAULT NULL,
   `latitude` float DEFAULT NULL,
   `longitude` float DEFAULT NULL,
