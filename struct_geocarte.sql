@@ -43,7 +43,7 @@ DROP TABLE IF EXISTS `cartepostale`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cartepostale` (
   `id` int(20) NOT NULL auto_increment,
-  `codeEditeur` int(20) NOT NULL,
+  `codeEditeur` int(20) DEFAULT NULL,
   `commune_insee` varchar(6) DEFAULT NULL,
   `editeur_id` int(20) NOT NULL,
   PRIMARY KEY (`id`),
