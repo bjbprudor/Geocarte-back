@@ -223,8 +223,8 @@ DROP TABLE IF EXISTS `variantecarte`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `variantecarte` (
   `id` int(11) NOT NULL,
-  `dos` varchar(255) NOT NULL,
-  `face` varchar(255) NOT NULL,
+  `dos` varchar(255) DEFAULT NULL,
+  `face` varchar(255) DEFAULT NULL,
   `legende` varchar(255) NOT NULL,
   `lengende_2` varchar(255) DEFAULT NULL,
   `cartePostale_id` int(20) NOT NULL,
