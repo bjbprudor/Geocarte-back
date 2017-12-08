@@ -53,7 +53,7 @@ public class ExempleController
 	public void TestPersist()
 	{
     	try
-    	{
+    	{/*
             Utilisateur u = new Utilisateur("user","use@mail.com","pass");
             utr.save(u);
             TypeMonument t = new TypeMonument("chateau");
@@ -71,7 +71,7 @@ public class ExempleController
             anr.save(an);
             int li = anr.findLastId(c);
             AncienNom an2 = new AncienNom(new AncienNomId(li+1,c),"","noma");
-            anr.save(an2);
+            anr.save(an2);*/
             log.info("done");
     	}
     	catch(Exception e)

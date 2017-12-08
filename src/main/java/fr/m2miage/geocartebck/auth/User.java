@@ -15,7 +15,7 @@ public class User
 
     public User()
     {
-        Utilisateur = new Utilisateur();
+        //Utilisateur = new Utilisateur();
     }
 
     public void Connect(String username, String password)
@@ -23,19 +23,19 @@ public class User
 
     }
 
-    public void Connect(String email, String password)
+    public void ConnectTo(String email, String password)
     {
 
     }
 
     public String getUsername()
     {
-        return; utilisateur.getNom();
+        return "";// utilisateur.getNom();
     }
 
 
 
-    private getUnencrypterPassword()
+    private void getUnencrypterPassword()
     {
 
     }
