@@ -15,7 +15,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
 public class VarianteCarteController
 {
 
@@ -58,7 +57,7 @@ public class VarianteCarteController
 
     // -------------------Create a VarianteCarte-------------------------------------------
 
-    @RequestMapping(value = "/tm/", method = RequestMethod.POST)
+    @RequestMapping(value = "/vcarte/", method = RequestMethod.POST)
     public ResponseEntity<?> createVarianteCarte(@RequestBody VarianteCarte target, UriComponentsBuilder ucBuilder)
     {
         String msg = String.format("Creating VarianteCarte : {%s}", target);
