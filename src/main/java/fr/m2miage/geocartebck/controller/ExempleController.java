@@ -79,5 +79,27 @@ public class ExempleController
     		log.error(e.toString());
     	}
 	}
+
+	public void TestTM()
+    {
+        log.info("test typeMonument start");
+        try
+        {
+            TypeMonument tm = new TypeMonument("castle");
+            TypeMonument tm2 = new TypeMonument("parc");
+            tmr.save(tm);
+            tmr.save(tm2);
+            //tmr.findOne(5);
+            tmr.delete(2);
+            TypeMonument tm3 = tmr.findOne(1);
+            tm3.setLibelle("chateau");
+            tmr.save(tm3);
+        }
+        catch (Exception ex)
+        {
+            log.error(ex.getMessage());
+        }
+        log.info("test typeMonument done");
+    }
 	
 }

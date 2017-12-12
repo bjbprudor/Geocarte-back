@@ -28,7 +28,7 @@ public class CartePostale implements Serializable
 	@OneToMany(mappedBy = "id.cartePostale")
     private List<VarianteCarte> variantes;
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 

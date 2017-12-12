@@ -29,7 +29,7 @@ public class Editeur implements Serializable
 	@OneToMany(mappedBy = "editeur")
     private List<CartePostale> cartePostales;
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 

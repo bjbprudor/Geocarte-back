@@ -19,6 +19,10 @@ public class TypeMonument implements Serializable
         return numero;
     }
 
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
     public String getLibelle() {
         return libelle;
     }

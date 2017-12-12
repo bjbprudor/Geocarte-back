@@ -10,11 +10,11 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 
 import fr.m2miage.geocartebck.controller.ExempleController;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages={"fr.m2miage.geocartebck"})
 public class App extends SpringBootServletInitializer implements CommandLineRunner 
 {
 
-    public static Logger log = Logger.getLogger(App.class);
+    public static final Logger log = Logger.getLogger(App.class);
     
 	@Autowired
 	private ExempleController exCtrl;
@@ -34,8 +34,8 @@ public class App extends SpringBootServletInitializer implements CommandLineRunn
     public void run(String... args) throws Exception 
     {
         log.info("L'application geocarte vient de demarrer");
-        //
-    	exCtrl.TestPersist();
+    	//exCtrl.TestPersist();
+        //exCtrl.TestTM();
     }
     
 }
