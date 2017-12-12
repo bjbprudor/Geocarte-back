@@ -1,6 +1,5 @@
 package fr.m2miage.geocartebck.controller;
 
-import fr.m2miage.geocartebck.CustomErrorType;
 import fr.m2miage.geocartebck.dao.VarianteCarteRepository;
 import fr.m2miage.geocartebck.model.VarianteCarte;
 import fr.m2miage.geocartebck.model.VarianteCarteId;

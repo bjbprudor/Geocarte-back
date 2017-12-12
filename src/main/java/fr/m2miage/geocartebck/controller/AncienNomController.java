@@ -1,6 +1,5 @@
 package fr.m2miage.geocartebck.controller;
 
-import fr.m2miage.geocartebck.CustomErrorType;
 import fr.m2miage.geocartebck.dao.AncienNomRepository;
 import fr.m2miage.geocartebck.model.AncienNom;
 import fr.m2miage.geocartebck.model.AncienNomId;

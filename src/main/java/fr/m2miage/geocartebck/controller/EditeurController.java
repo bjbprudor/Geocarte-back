@@ -1,6 +1,5 @@
 package fr.m2miage.geocartebck.controller;
 
-import fr.m2miage.geocartebck.CustomErrorType;
 import fr.m2miage.geocartebck.dao.EditeurRepository;
 import fr.m2miage.geocartebck.model.Editeur;
 import org.apache.log4j.Logger;

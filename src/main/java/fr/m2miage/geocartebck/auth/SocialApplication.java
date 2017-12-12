@@ -40,12 +40,13 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+/*
 @SpringBootApplication
 @RestController
 @EnableOAuth2Client
-public class SocialApplication extends WebSecurityConfigurerAdapter {
-
+*/
+public class SocialApplication { //extends WebSecurityConfigurerAdapter {
+/*
 	@Autowired
 	OAuth2ClientContext oauth2ClientContext;
 
@@ -102,5 +103,5 @@ public class SocialApplication extends WebSecurityConfigurerAdapter {
 	public ResourceServerProperties facebookResource() {
 		return new ResourceServerProperties();
 	}
-
+*/
 }
